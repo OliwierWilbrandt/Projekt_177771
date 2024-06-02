@@ -24,7 +24,7 @@ from PIL import Image
 # plt.plot(x, x**3, label="sześcienna")
 # plt.xlabel('etykieta x')
 # plt.ylabel("etykieta y ")
-# plt.title("Proaty wykres")
+# plt.title("Prosty wykres")
 # plt.legend()
 # plt.savefig('wykres matplot.png')
 # plt.show()
@@ -52,6 +52,82 @@ from PIL import Image
 # plt.xlabel('wartośc a')
 # plt.ylabel('wartość b')
 # plt.show()
+
+
+# x1 = np.arange(0, 2, 0.02)
+# x2 = np.arange(0, 2, 0.02)
+# y1 = np.sin(2 * np.pi * x1)
+# y2 = np.cos(2 * np.pi * x2)
+# plt.subplot(2, 1, 1)
+# plt.plot(x1, y1, '-')
+# plt.title('wykres sin(x)')
+# plt.xlabel('x')
+# plt.ylabel('sin(x)')
+#
+# plt.subplot(2, 1, 2)
+# plt.plot(x2, y2, 'r-')
+# plt.xlabel('x')
+# plt.ylabel('cos(x)')
+# plt.title('wykres cos(x)')
+# plt.subplots_adjust(hspace=0.5)
+# plt.show()
+
+# x1 = np.arange(0.0, 2.0, 0.02)
+# x2 = np.arange(0.0, 2.0, 0.02)
+# y1 = np.sin(2 * np.pi * x1)
+# y2 = np.cos(2 * np.pi * x2)
+# fig, axs = plt.subplots(3, 2)
+# axs[0, 0].plot(x1, y1, '-')
+# axs[0, 0].set_title('wykres sin(x)')
+# axs[0, 0].set_xlabel('x')
+# axs[0, 0].set_ylabel('sin(x)')
+# axs[1, 1].plot(x2, y2, 'r-')
+# axs[1, 1].set_title('wykres cos(x)')
+# axs[1, 1].set_xlabel('x')
+# axs[1, 1].set_ylabel('cos(x)')
+# axs[2, 0].plot(x2, y2, 'r-')
+# axs[2, 0].set_title('wykres cos(x)')
+# axs[2, 0].set_xlabel('x')
+# axs[2, 0].set_ylabel('cos(x)')
+# fig.delaxes(axs[0, 1])
+# fig.delaxes(axs[1, 0])
+# fig.delaxes(axs[2, 1])
+#
+# plt.subplots_adjust(hspace=0.25, wspace=0.25)
+# plt.show()
+
+
+# data = {'Kraj': ['Belgia', 'Indie', 'Brazylia', 'Polska'],
+#         'Stolica': ['Bruksela', 'New Delhi', 'Brasilia', 'Warszawa'],
+#         'Kontynent': ['Europa', 'Azja', 'Ameryka Południowa', 'Europa'],
+#         'Populacja': [11190846, 130317035, 287847528, 38675467]}
+# df = pd.DataFrame(data)
+# print(df)
+# grupa = df.groupby('Kontynent')
+# etykiety = np.array(list(grupa.groups.keys()))
+# wartosci = list(grupa.agg('Populacja').sum())
+# fig, ax = plt.subplots()
+# ax.bar(x=etykiety, height=wartosci, color=['yellow', 'green', 'red'])
+# ax.set_xlabel('Kntynenty')
+# ax.set_ylabel('Populacja')
+# ax.ticklabel_format(axis='y', style='plain')
+# fig.subplots_adjust(left=0.2)
+# plt.show()
+
+
+df = pd.read_csv('dane.csv', header=0, sep=";",
+                 decimal=".")
+print(df)
+seria = df.groupby('Imię i nazwisko')['Wartość zamówienia'].sum()
+wedges, texts, autotext = plt.pie(x=seria, labels=seria.index,
+                                  autopct=lambda pct: "{:.1f}%".
+                                  format(pct),
+                                  textprops=dict(color="black"),
+                                  colors=['red', 'green'])
+plt.title('Suma zamówień dla sprzedawców')
+plt.legend(loc='lower right')
+plt.ylabel('Procentowy wynik wartości zamówienia')
+plt.show()
 
 
 
